@@ -9,13 +9,44 @@ export const useCardStore = defineStore({
     error: null
   }),
   getters: {
-    //get by topic will go here
+    getCardForPassCode: (state) => {
+      return (passCode) => state.cards.filter((card) => card.passCode.toLowerCase() ===  passCode.toLowerCase())
+    }
   },
   actions: {
-    // TODO: finish adapting from POSTS
-    // need to call madamadam
-    // skip other two when done,
-    // go straight to adapting PostView 
-    // to be CardView
+    async fetchCards() {
+      this.cards = []
+      this.loading = true
+      try {
+        
+        this.cards = await fetch('https://madamadam.cyclic.app/cards').then((response) => response.json())
+
+      } catch (error) {
+
+        this.error = error
+
+      } finally {
+
+        this.loading = false
+
+      }
+    },
+    async fetchCard(id) {
+      this.card = null
+      this.loading = true
+      try{
+
+        this.card = await fetch(`https://madamadam.cyclic.app/cards/${id}`).then((response) => response.json())
+
+      } catch (error) {
+
+        this.error = error
+
+      } finally {
+
+        this.loading = false
+
+      }
+    }
   }
 })
