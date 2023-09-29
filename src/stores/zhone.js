@@ -14,7 +14,7 @@ export const useZhoneStore = defineStore({
   },
   actions: {
     async fetchZhones() {
-      this.comments = await fetch('https://madamadam.cyclic.app/zhones').then((response) => response.json())
+      this.zhones = await fetch('https://madamadam.cyclic.app/zhones').then((response) => response.json())
     }
   }
 })

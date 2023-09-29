@@ -1,38 +1,22 @@
 <script setup>
-  // import { RouterLink } from 'vue-router'
-  // import { storeToRefs } from 'pinia'
   import { useZhoneStore } from '../stores/zhone';
   
-  //TODO: implement
-  // import Zhone from '../components/ZhoneHolder.vue'
+  import ZhonesHolder from '../components/ZhonesHolder.vue'
 
   defineProps(['card', 'zhones'])
 
-  // const { getCardZhones } = storeToRefs(useZhoneStore())
   const { fetchZhones } = useZhoneStore()
 
   fetchZhones()
 </script>
 
 <template>
-  <!-- <RouterLink
-    :to="`/card/${card.id}`"
-  >
-    {{ card.passCode }}
-  </RouterLink> -->
   <div v-if="card">
-    <img class="card" :src="card.image"> 
     <p class="display">{{ card.passCode }}</p>
-    <!-- <div v-if="zhones">
-      <p class="display">ZHONES:</p>
-      <div
-        v-for="zhone in getCardZhones"
-        :key="zhone.id"
-        class="display"
-      >
-        Zhone: {{ zhone }}
-      </div>  
-    </div> -->
+    <img class="card" :src="card.image"> 
+    <div v-if="zhones">
+      <ZhonesHolder :zhones="zhones"></ZhonesHolder>
+    </div>
   </div>
 </template>
 
